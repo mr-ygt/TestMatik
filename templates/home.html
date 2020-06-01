@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Anasayfa - {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-6" style="background-color: red; height: 100px;">1.sütun</div>
+            <div class="col-md-3 col-sm-6" style="background-color: gold; height: 90px;">2.sütun</div>
+            <div class="col-md-3 col-sm-6" style="background-color: #ff01ff; height: 200px;">3.sütun AYŞE GACISI</div>
+            <div class="col-md-3 col-sm-6" style="background-color: #1c00ff; height: 90px;">4.sütun</div>
+        </div>
+
+    Hoşgeldiniz, {{ request.user.get_full_name }}
+    </div>
+
+{% endblock %}

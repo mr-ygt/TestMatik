@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+    <div class="container">
+    {% for soru in sorular %}
+        <div class="card col-md-6 offset-md-3">
+            <div class="card-body">
+                {% if soru.image %}
+                    <img src="{{ soru.image.url }}" class="img-fluid">
+                {% endif %}
+
+                <h5 class="card-title">{{ soru.title }}<small>   {{ soru.sınıf }}.sınıf  </small></h5>
+                <h5 class="card-title">{{ soru.ders }}<small>   {{ soru.konu }}  </small></h5>
+                <h5 class="card-title">{{ soru.user }} hoca</h5>
+                <p class="card-text">{{ soru.soru|safe }}</p>
+                <a href="{{ soru.get_absolute_url }}" class="btn btn-primary">incele</a>
+                <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
+                <a href="{{ soru.get_update_url }}" class="btn btn-dark">düzenle</a>
+
+          </div>
+        </div>
+    {% endfor %}
+
+     <div class="card col-md-6 offset-md-3">
+            <div class="card-body">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if sorular.has_previous %}
+                            <a href="?sayfa={{ sorular.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ sorular.number }} of {{ sorular.paginator.num_pages }}.
+                        </span>
+
+                        {% if sorular.has_next %}
+                            <a href="?sayfa={{ sorular.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+
+            </div>
+     </div>
+
+    </div>
+
+{% endblock %}
