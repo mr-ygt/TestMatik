@@ -1,35 +1,83 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block body %}
 
 
-    <div class="container">
-    <div class="row">
-        {% for soru in sorular %}
-           <!-- <div class="col mb-3"> -->
-            <div class="col-xs-12 col-md-6 col-lg-4 mb-4 ">
-                <div class="card h-100" style="positon: relative;">
-                <h5 class="card-title">{{ soru.title }}</h5>
-                    {% if soru.image %}
-                        <img src="{{ soru.image.url }}" class="card-img-top">
-                        <input type="checkbox" class="checkbox" id="check1" style="position: absolute; top: 0px; right: 0px; width: 40px; height: 40px"/>
-                    {% endif %}
+    <div class="container"style="width:100%; text-align: center;" >
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <div style="float:left">
 
-                    <div class="card-body">
+         <h4>Filtrele</h4>
 
-                    <h5 class="card-title"><small>   {{ soru.sınıf }}.sınıf  </small></h5>
-                    <h5 class="card-title">{{ soru.ders }}<small>   {{ soru.konu }}  </small></h5>
-                    <h5 class="card-title">{{ soru.user }} hoca</h5>
-                    <p class="card-text">{{ soru.soru|safe }}</p>
-                   <!-- <a href="{{ soru.get_absolute_url }}" class="btn btn-primary">incele</a>
-                    <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
-                    <a href="{{ soru.get_update_url }}" class="btn btn-dark">düzenle</a>-->
+    <div class="sınıf-select" style="width:200px;">
+    <select>
+    <option value="0">Sınıf Seçiniz</option>
+    <option value="1">5.Sınıf</option>
+    <option value="2">6.Sınıf</option>
+    <option value="3">7.Sınıf</option>
+    <option value="4">8.Sınıf</option>
+    </select>
+    </div>
+
+    <div class="ders-select" style="width:200px;">
+    <select>
+    <option value="0">Ders Seçiniz</option>
+    <option value="1">Matematik</option>
+    <option value="2">Türkçe</option>
+    <option value="3">Fen Bilgisi</option>
+    <option value="4">Sosyal bilgiler</option>
+    </select>
+    </div>
+
+    <input class="konu-control" type="text" placeholder="Konuyu Giriniz" style="width:200px;">
+
+    <div class="zorluk-select" style="width:200px;">
+    <select>
+    <option value="0">Zorluk Seçiniz</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    </select>
+    </div>
+    </div>
+    <div style="float:right">
+
+        <p> yigit </p>
+        <p> yigit </p>
+        <p> yigit </p>
+        <p> yigit </p>
+
+    </div>
+
+    <div>
+        <div class="row">
+            {% for soru in sorular %}
+            <!-- <div class="col mb-3"> -->
+                <div class="col-xs-12 col-md-6 col-lg-4 mb-4 ">
+                    <div class="card h-100" style="positon: relative;">
+                        <h5 class="card-title">{{ soru.title }}</h5>
+                        {% if soru.image %}
+                            <img src="{{ soru.image.url }}" class="card-img-top">
+                            <input type="checkbox" class="checkbox" id="{{ soru.id }}" style="position: absolute; top: 0px; right: 0px; width: 40px; height: 40px;"/>
+                        {% endif %}
+
+                        <div class="card-body">
+
+                            <h5 class="card-title"><small>   {{ soru.sınıf }}.sınıf  </small></h5>
+                            <h5 class="card-title">{{ soru.ders }}<small> {{ soru.konu }}  </small></h5>
+                            <h5 class="card-title">{{ soru.user }} hoca ve {{ soru.id }} </h5>
+                            <p class="card-text">{{ soru.soru|safe }}</p>
+                            <!-- <a href="{{ soru.get_absolute_url }}" class="btn btn-primary">incele</a>
+                            <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
+                            <a href="{{ soru.get_update_url }}" class="btn btn-dark">düzenle</a>-->
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
-
+    </div>
      <div class="card col-md-6 offset-md-3">
             <div class="card-body">
                 <div class="pagination">

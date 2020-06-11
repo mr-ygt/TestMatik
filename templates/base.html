@@ -1,15 +1,22 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+   <style>html{ min-height:100vh; background-color: #ffff99;}body{; height:100%; padding-top: 330px;}</style>
+
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}AYYSEEE{% endblock %}</title>
+    <title>{% block title %}TestMatik{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
 
+    <center><h4 style="font-family:Roboto;">TEST OLUŞTURMAK ARTIK ÇOK DAHA KOLAY</h4></center>
+    <center><h1 style="font-size: 500%" style="font-family:Arial Black;" >TestMatik</h1></center>
+    <div style="background-color: #ffff99">
     {% include 'header.html' %}
 
     {% include 'messages.html' %}
@@ -20,5 +27,7 @@
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </div>
 </body>
+
 </html>

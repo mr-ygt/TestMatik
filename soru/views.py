@@ -14,11 +14,9 @@ def soru_index(request):
     query = request.GET.get('q')
     if query:
         soru_list = soru_list.filter(
-            Q(konu__icontains=query) |
-            Q(ders__icontains=query) |
-            Q(sınıf__icontains=query)
+            Q(user__username__icontains=query)
         ).distinct()
-    paginator = Paginator(soru_list, 5)  # Show 25 contacts per page
+    paginator = Paginator(soru_list, 99)  # Show 25 contacts per page
 
     page = request.GET.get('sayfa')
     try:

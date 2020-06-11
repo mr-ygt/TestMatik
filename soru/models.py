@@ -48,4 +48,4 @@ class Soru(models.Model):
         return super(Soru, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ['sınıf']
+        ordering = ['id']
