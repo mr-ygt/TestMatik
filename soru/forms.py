@@ -8,11 +8,9 @@ class SoruForm(forms.ModelForm):
     class Meta:
         model = Soru
         fields = [
-            'title',
             'sınıf',
             'ders',
             'konu',
             'zorluk',
-            'soru',
             'image',
         ]

@@ -33,7 +33,7 @@ def soru_index(request):
             Q(sınıf__icontains=sinifquery) &
             Q(konu__icontains=konuquery)
         ).distinct()
-    paginator = Paginator(soru_list, 99)  # Show 25 contacts per page
+    paginator = Paginator(soru_list, 9)  # Show 25 contacts per page
 
     page = request.GET.get('sayfa')
     try:
@@ -47,6 +47,47 @@ def soru_index(request):
 
     return render(request, 'soru/index.html', {'sorular': sorular})
 
+
+def my_index(request):
+    soru_list = Soru.objects.filter(user__username__exact='emre')
+    query = request.GET.get('q')
+    if query:
+        soru_list = soru_list.filter(
+            Q(user__username__icontains=query)
+        ).distinct()
+
+
+    zorlukquery = request.GET.get('w')
+    dersquery = request.GET.get('e')
+    sinifquery = request.GET.get('r')
+    konuquery = request.GET.get('t')
+    if zorlukquery or dersquery or sinifquery or konuquery:
+        soru_list = soru_list.filter(
+            Q(zorluk__icontains=zorlukquery) &
+            Q(ders__icontains=dersquery) &
+            Q(sınıf__icontains=sinifquery) &
+            Q(konu__icontains=konuquery)
+        ).distinct()
+    paginator = Paginator(soru_list, 9)  # Show 25 contacts per page
+
+    page = request.GET.get('sayfa')
+    try:
+        sorular = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        sorular = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        sorular = paginator.page(paginator.num_pages)
+
+    return render(request, 'soru/index.html', {'sorular': sorular})
+
+
+def soru_quittest(request, slug):
+    soru = get_object_or_404(Soru, slug=slug)
+    soru.testid = 0
+    soru.save()
+    return redirect('soru:testindex')
 
 def soru_detail(request, slug):
     soru = get_object_or_404(Soru, slug=slug)
@@ -70,7 +111,7 @@ def soru_testindex(request):
             Q(ders__icontains=query) |
             Q(sınıf__icontains=query)
         ).distinct()
-    paginator = Paginator(soru_list, 5)  # Show 25 contacts per page
+    paginator = Paginator(soru_list, 9)  # Show 25 contacts per page
 
     page = request.GET.get('sayfa')
     try:
@@ -92,7 +133,7 @@ def soru_create(request):
         soru = form.save(commit=False)
         soru.user = request.user
         soru.save()
-        messages.success(request, 'afferin oldu')
+        messages.success(request, 'Soru Yüklendi!')
         return HttpResponseRedirect(soru.get_absolute_url())
     context = {
         'form': form,
@@ -106,7 +147,7 @@ def soru_update(request, slug):
     form = SoruForm(request.POST or None, request.FILES or None, instance=soru)
     if form.is_valid():
         form.save()
-        messages.success(request, 'afferin oldu', extra_tags='efferin')
+        messages.success(request, 'Soru Güncellendi!', extra_tags='Başarılı!')
         return HttpResponseRedirect(soru.get_absolute_url())
     context = {
         'form': form,

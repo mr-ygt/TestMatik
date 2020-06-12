@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <!--<div style="float:left">-->
 
-         <center><h4>Filtrele</h4></center>
+         <center><h3>Filtrele</h3></center>
 
 
         <form class="form-inline my-2 my-lg-1 offset-md-1">
@@ -35,21 +35,25 @@
             <!-- <div class="col mb-3"> -->
                 <div class="col-xs-12 col-md-6 col-lg-4 mb-4 ">
                     <div class="card h-100" style="position: relative;">
-                        <h5 class="card-title">{{ soru.title }}</h5>
+
                         {% if soru.image %}
                             <img src="{{ soru.image.url }}" class="card-img-top">
-                            <input type="checkbox" class="checkbox" id="{{ soru.id }}" style="position: absolute; top: 0px; right: 0px; width: 40px; height: 40px;"/>
+                           <!-- <input type="checkbox" class="checkbox" id="{{ soru.id }}" style="position: absolute; top: 0px; right: 0px; width: 40px; height: 40px;"/>-->
                         {% endif %}
 
                         <div class="card-body">
 
-                            <h5 class="card-title"><small>   {{ soru.sınıf }}.sınıf  </small></h5>
-                            <h5 class="card-title">{{ soru.ders }}<small> {{ soru.konu }}  </small></h5>
-                            <h5 class="card-title">{{ soru.user }} hoca ve {{ soru.id }} </h5>
-                            <p class="card-text">{{ soru.soru|safe }}</p>
+                            <h5 class="card-title"> {{ soru.sınıf }}.sınıf </h5>
+                            <h5 class="card-title">Ders: {{ soru.ders }} - {{ soru.konu }} </h5>
+                            <h5 class="card-title">Zorluk: {{ soru.zorluk }}</h5>
+                            <h5 class="card-title">Yükleyen: {{ soru.user }}</h5>
+
                             <!-- <a href="{{ soru.get_absolute_url }}" class="btn btn-primary">incele</a>
-                            <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
-                            <a href="{{ soru.get_update_url }}" class="btn btn-dark">düzenle</a>-->
+                            -->
+                            {% if request.user.is_superuser %}
+                            <a href="{{ soru.get_update_url }}" class="btn btn-primary">düzenle</a>
+                                <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
+                            {% endif %}
                             <a href="{{ soru.set_testid_url }}" class="btn btn-dark">teste ekle</a>
                         </div>
                     </div>

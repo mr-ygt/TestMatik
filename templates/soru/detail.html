@@ -11,12 +11,10 @@
                     <img src="{{ soru.image.url }}" class="img-fluid">
                 {% endif %}
 
-                <h5 class="card-title">{{ soru.title }}<small>   {{ soru.sınıf }}.sınıf  </small></h5>
+                <h5 class="card-title"><small>   {{ soru.sınıf }}.sınıf  </small></h5>
                 <h5 class="card-title">{{ soru.ders }}<small>   {{ soru.konu }}  </small></h5>
-                <p class="card-text">{{ soru.soru|safe }}</p>
-                <a href="{{ soru.get_absolute_url }}" class="btn btn-primary">incele</a>
-                <a href="{{ soru.get_delete_url }}" class="btn btn-danger">soruyu sil</a>
-                <a href="{{ soru.get_update_url }}" class="btn btn-dark">düzenle</a>
+                <h5 class="card-title">Zorluk: {{ soru.zorluk }}</h5>
+            <h5 class="card-title">Yükleyen: {{ soru.user }}</h5>
 
           </div>
         </div>

@@ -7,20 +7,21 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Soru(models.Model):
     user = models.ForeignKey('auth.User', verbose_name='HOCA', related_name='sorular')
-    title = models.CharField(max_length=120)
 
     sınıf = models.IntegerField()
     ders = models.CharField(max_length=100)
     konu = models.CharField(max_length=100)
     zorluk = models.IntegerField()
-    soru = RichTextField()
 
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField()
     slug = models.SlugField(unique=True, editable=False, max_length=130)
     testid = models.CharField(null=True, blank=True, max_length=100)
 
+    def set_quittest_url(self):
+        return reverse('soru:quittest', kwargs={'slug': self.slug})
+
     def __str__(self):
-        return self.title
+        return self.ders
 
     def pdf_acma(self):
         return reverse('soru:pdf')
@@ -42,7 +43,7 @@ class Soru(models.Model):
         return reverse('soru:delete', kwargs={'slug': self.slug})
 
     def get_unique_slug(self):
-        slug = slugify(self.title.replace('ı', 'i'))
+        slug = slugify(self.ders.replace('ı', 'i'))
         unique_slug = slug
         counter = 1
         while Soru.objects.filter(slug=unique_slug).exists():

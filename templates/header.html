@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-  <a class="navbar-brand" href="#">TestMatik</a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,36 +8,38 @@
     <ul class="navbar-nav mr-auto">
 
         <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Anasayfa <span class="sr-only">(current)</span></a>
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'home' %}">Anasayfa <span class="sr-only">(current)</span></a>
+
+        </li>
+     {% if request.user.is_authenticated %}
+        <li class="nav-item active">
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'soru:create' %}">Soru Yükle</a>
         </li>
 
         <li class="nav-item active">
-            <a class="nav-link" href="{% url 'soru:create' %}">Soru Yükle</a>
-        </li>
-
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'soru:index' %}">Test Oluştur</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'soru:index' %}">Test Oluştur</a>
         </li>
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Profil
+            <a class="btn btn-sm btn-outline-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profil &#11183;
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'soru:index' %}">Sorularım</a>
-              <a class="dropdown-item" href="{% url 'soru:testindex' %}">Kayıtlı Testlerim</a>
+              <a class="dropdown-item" href="{% url 'soru:myindex' %}">Sorularım</a>
+              <a class="dropdown-item" href="{% url 'soru:testindex' %}">Kayıtlı Testim</a>
             </div>
         </li>
+    {% endif %}
 <!--
         <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
 -->
         {% if not request.user.is_authenticated %}
-            <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:register' %}">Üye Ol</a></li>
-            <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:login' %}">Giriş Yap</a></li>
+            <li class="nav-item active"><a class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:register' %}">Üye Ol</a></li>
+            <li class="nav-item active"><a class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:login' %}">Giriş Yap</a></li>
         {% else %}
-            <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:logout' %}">Çıkış Yap</a></li>
+            <li class="nav-item active"><a class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:logout' %}">Çıkış Yap</a></li>
         {% endif %}
 
     </ul>

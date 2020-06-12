@@ -3,8 +3,8 @@
 <!DOCTYPE html >
 <html>
     <head>
-        <title>Title</title>
-       <!-- <style type="text/css">
+        <title>Test</title>
+       <style type="text/css">
             body {
                 font-weight: 200;
                 font-size: 14px;
@@ -36,36 +36,32 @@
                 color: #333; /* old IE */
                 background-color: #fff; /* Modern Browsers */
             }
-        </style>-->
+           .soru{
+ counter-reset: section;
+           }
+        </style>
     </head>
-    <div>
-
-       <!-- <div class='wrapper'>-->
-            <div class='header'>
-                <p class='title'>Invoice # </p>
+    <div class='header'>
+                <p class='title'>Test 1</p>
             </div>
-    <div>
         <div class="row">
         {% for soru in sorular %}
             <div class="col-xs-12 col-md-6 col-lg-4 mb-4 ">
              <div class="card h-100" style="position: relative;">
             {% if soru.image %}
+
                 <!-- <img src="{{ 'C:\Users\furka\PyCharm Proje\testmatik\static\indir.png' }}" alt="">-->
-                <img src="{{ 'C:\Users\donmr\PycharmProjects\testmatikk' }}{{ soru.image.url}}" alt="">
+                <center><img src="{{ 'C:\Users\donmr\PycharmProjects\testmatikk' }}{{ soru.image.url}}" alt="Soru"></center>
+    <hr>
 
             {% endif %}
              </div>
             </div>
         {% endfor %}
+        <center><h2>Test Bitti! Cevaplari Kontrol Ediniz.</h2></center>
         </div>
-    </div>
-        <div class='details'>
 
-            Bill to: {{ customer_name }}<br/>
-            Amount: {{ amount }} <br/>
-            Date:
-            <hr class='hrItem' />
-        </div>
-   <!-- </div>-->
+ <!--           <hr class='hrItem' />-->
+
     </body>
 </html>
