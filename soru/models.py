@@ -17,9 +17,16 @@ class Soru(models.Model):
 
     image = models.ImageField(null=True, blank=True)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
+    testid = models.CharField(null=True, blank=True, max_length=100)
 
     def __str__(self):
         return self.title
+
+    def pdf_acma(self):
+        return reverse('soru:pdf')
+
+    def set_testid_url(self):
+        return reverse('soru:settest', kwargs={'slug': self.slug})
 
     def get_absolute_url(self):
         return reverse('soru:detail', kwargs={'slug': self.slug})
